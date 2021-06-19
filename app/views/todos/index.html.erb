@@ -1,7 +1,24 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm mt-5 text-center">
-      <h1>ToDo リスト</h1>
+<div class="my-5 text-center">
+  <h1>ToDo リスト</h1>
+</div>
+<% @todos.each do |todo| %>
+  <div class="card mx-auto w-50 mb-3">
+    <h6 class="card-header <%= todo.status == 'In progress' ? 'bg-warning' : 'bg-success' %>">
+      <%= todo.status %>
+    </h6>
+    <div class="card-body">
+      <h5 class="card-title">
+          <%= todo.title %>
+      </h5>
+      <p class="card-text">
+        <%= todo.description %>
+      </p>
+      <a href="#" class="btn btn-secondary">
+        Edit
+      </a>
+      <a href="#" class="btn btn-danger">
+        Delete
+      </a>
     </div>
   </div>
-</div>
+<% end %>
