@@ -4,9 +4,12 @@ class TodosController < ApplicationController
   end
 
   def create
+    @title = params[:title]
+    @description = params[:description]
+
     @todo = Todo.new(
-      title: params[:title],
-      description: params[:description],
+      title: @title,
+      description: @Description,
       status: 'In progress'
     )
 
@@ -14,9 +17,14 @@ class TodosController < ApplicationController
       redirect_to :action => 'index'
     else
       @todos = Todo.all
-      @title = params[:title]
-      @description = params[:description]
       render 'index'
     end
+  end
+
+  def destroy
+    @id = params[:id]
+    @todo = Todo.find(@id)
+    @todo.destroy
+    redirect_to :action => 'index'
   end
 end

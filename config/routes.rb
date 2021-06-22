@@ -3,4 +3,5 @@ Rails.application.routes.draw do
 
   root 'todos#index'
   post '/' => 'todos#create'
+  delete '/:id' => 'todos#destroy'
 end
