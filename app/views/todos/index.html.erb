@@ -37,6 +37,7 @@
       <p class="card-text">
         <%= todo.description %>
       </p>
+      <%= link_to (todo.status == 'In progress' ? 'Complete' : 'Cancel'), "/#{todo.id}", method: :put, class: "btn btn-" + (todo.status == 'In progress' ? 'info' : 'secondary') %>
       <a href="#" class="btn btn-secondary">
         Edit
       </a>
