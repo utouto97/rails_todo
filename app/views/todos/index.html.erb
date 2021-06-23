@@ -2,11 +2,11 @@
   ToDo リスト
 </h1>
 
-<form action="/" method="post" class="mb-5 w-50 mx-auto">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<form action="/" method="post" class="mb-5 w-50 mx-auto" name='user'>
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
   <div class="form-group">
     <label for="title">Title</label>
-    <input type="text" class="form-control" name="title" placeholder="Title" value=<%= @title %> />
+    <input type="text" class="form-control" name="title" placeholder="Title" />
     <% if @todo && @todo.errors.full_messages_for(:title) then %>
       <small class="form-text text-danger">
         <%= @todo.errors.full_messages_for(:title)[0] %>
@@ -22,6 +22,7 @@
       </small>
     <% end %>
   </div>
+  <input type="hidden" name="status" value="In progress" />
   <button type="submit" class="mt-2 btn btn-primary">Add</button>
 </form>
 

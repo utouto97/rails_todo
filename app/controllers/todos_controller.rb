@@ -4,14 +4,7 @@ class TodosController < ApplicationController
   end
 
   def create
-    @title = params[:title]
-    @description = params[:description]
-
-    @todo = Todo.new(
-      title: @title,
-      description: @description,
-      status: 'In progress'
-    )
+    @todo = Todo.new(todo_params)
 
     if @todo.save
       redirect_to :action => 'index'
@@ -22,17 +15,20 @@ class TodosController < ApplicationController
   end
 
   def destroy
-    @id = params[:id]
-    @todo = Todo.find(@id)
+    @todo = Todo.find(params.require(:id))
     @todo.destroy
     redirect_to :action => 'index'
   end
 
   def toggle
-    @id = params[:id]
-    @todo = Todo.find(@id)
+    @todo = Todo.find(params.require(:id))
     new_status = @todo.status == 'In progress' ? 'Complete' : 'In progress'
     @todo.update(status: new_status)
     redirect_to :action => 'index'
+  end
+
+  private
+  def todo_params
+    return params.permit(:title, :description, :status)
   end
 end
