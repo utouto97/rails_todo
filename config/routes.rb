@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   post '/' => 'todos#create'
   delete '/:id' => 'todos#destroy'
   put '/:id' => 'todos#toggle'
+  get '/:id' => 'todos#pre_edit'
+  post '/:id' => 'todos#change'
 end

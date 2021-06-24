@@ -32,18 +32,32 @@
       <%= todo.status %>
     </h6>
     <div class="card-body">
-      <h5 class="card-title">
-          <%= todo.title %>
-      </h5>
-      <p class="card-text">
-        <%= todo.description %>
-      </p>
-      <%= link_to (todo.status == 'In progress' ? 'Complete' : 'Cancel'), "/#{todo.id}", method: :put, class: "btn btn-" + (todo.status == 'In progress' ? 'info' : 'secondary') %>
-      <a href="#" class="btn btn-secondary">
-        Edit
-      </a>
-      <%= link_to 'Delete', "/#{todo.id}", method: :delete, class: "btn btn-danger" %>
+      <% if (defined? @edit_id) && (@edit_id.to_i == todo.id) %>
+        <form action="/<%= todo.id %>" method="post" class="mb-5 w-50 mx-auto" name='user'>
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" name="title" placeholder="Title" value="<%= todo.title %>"/>
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" name="description" placeholder="Description"><%= todo.description %></textarea>
+          </div>
+          <input type="hidden" name="status" value="<%= todo.status %>" />
+          <button type="submit" class="mt-2 btn btn-primary">Send</button>
+          <%= link_to 'Cancel', "/", method: :get, class: "mt-2 btn btn-secondary" %>
+        </form>
+      <% else %>
+        <h5 class="card-title">
+            <%= todo.title %>
+        </h5>
+        <p class="card-text">
+          <%= todo.description %>
+        </p>
+        <%= link_to (todo.status == 'In progress' ? 'Complete' : 'Cancel'), "/#{todo.id}", method: :put, class: "btn btn-" + (todo.status == 'In progress' ? 'info' : 'secondary') %>
+        <%= link_to 'Edit', "/#{todo.id}", method: :get, class: "btn btn-secondary" %>
+        <%= link_to 'Delete', "/#{todo.id}", method: :delete, class: "btn btn-danger" %>
+      <% end %>
     </div>
   </div>
 <% end %>
-

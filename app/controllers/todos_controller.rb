@@ -27,6 +27,18 @@ class TodosController < ApplicationController
     redirect_to :action => 'index'
   end
 
+  def pre_edit
+    @edit_id = params.require(:id)
+    @todos = Todo.order(:created_at, :id)
+    render :index
+  end
+
+  def change
+    @todo = Todo.find(params.require(:id))
+    @todo.update(todo_params)
+    redirect_to :action => 'index'
+  end
+
   private
   def todo_params
     return params.permit(:title, :description, :status)
