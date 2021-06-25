@@ -1,6 +1,7 @@
 class TodosController < ApplicationController
   def index
-    @todos = Todo.order(:created_at, :id)
+    @todos = Todo.order(:created_at, :id).where(params.permit(:status))
+    @filter = params[:status]
   end
 
   def create
@@ -29,7 +30,8 @@ class TodosController < ApplicationController
 
   def pre_edit
     @edit_id = params.require(:id)
-    @todos = Todo.order(:created_at, :id)
+    @todos = Todo.order(:created_at, :id).where(params.permit(:status))
+    @filter = params[:status]
     render :index
   end
 

@@ -26,8 +26,18 @@
   <button type="submit" class="mt-2 btn btn-primary">Add</button>
 </form>
 
+<div class="w-50 mx-auto">
+
+  <%= link_to 'All', "/", method: :get,
+    class: "mt-2 btn btn-"+(@filter == nil ? "" : "outline-") +"secondary" %>
+  <%= link_to 'In progress', "/?status=In progress", method: :get,
+    class: "mt-2 btn btn-"+(@filter == "In progress" ? "" : "outline-") +"secondary" %>
+  <%= link_to 'Complete', "/?status=Complete", method: :get,
+    class: "mt-2 btn btn-"+(@filter == "Complete" ? "" : "outline-") +"secondary" %>
+</div>
+
 <% @todos.each do |todo| %>
-  <div class="card mx-auto w-50 mb-3">
+  <div class="card mx-auto w-50 my-3">
     <h6 class="card-header <%= todo.status == 'In progress' ? 'bg-warning' : 'bg-success' %>">
       <%= todo.status %>
     </h6>
@@ -55,7 +65,7 @@
           <%= todo.description %>
         </p>
         <%= link_to (todo.status == 'In progress' ? 'Complete' : 'Cancel'), "/#{todo.id}", method: :put, class: "btn btn-" + (todo.status == 'In progress' ? 'info' : 'secondary') %>
-        <%= link_to 'Edit', "/#{todo.id}", method: :get, class: "btn btn-secondary" %>
+        <%= link_to 'Edit', "/#{todo.id}"+(@filter == nil ? "" : "?status="+@filter), method: :get, class: "btn btn-secondary" %>
         <%= link_to 'Delete', "/#{todo.id}", method: :delete, class: "btn btn-danger" %>
       <% end %>
     </div>
