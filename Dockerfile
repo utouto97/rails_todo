@@ -8,5 +8,9 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 RUN mkdir /app
 WORKDIR /app
 
+COPY . /app/
+
 COPY Gemfile* /app/
 RUN bundle install
+
+CMD ["rails", "s", "-b", "0.0.0.0"]
