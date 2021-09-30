@@ -1,24 +1,14 @@
-# README
+Rails Todo
+==
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ruby on Rails を使って開発したToDo管理アプリ
 
-Things you may want to cover:
+<img src="rails_todo.gif" width="320">
 
-* Ruby version
 
-* System dependencies
+## 使っているもの
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Ruby on Rails
+- Bootstrap
+- Docker & Docker-compose
+- PostgreSQL
